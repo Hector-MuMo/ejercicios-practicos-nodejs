@@ -41,20 +41,20 @@ const addUser = (username) => {
       const data = await fs.readFile(users, "utf8");
       arr = await JSON.parse(data);
       arr = [...arr, username];
+
+      (async () => {
+        try {
+          await fs.writeFile(users, JSON.stringify(arr));
+        } catch (error) {
+          console.log(error);
+        }
+      })();
     } catch (error) {
       console.log(error);
     }
   };
 
   readInfo();
-
-  (async () => {
-    try {
-      await fs.writeFile(users, JSON.stringify(arr));
-    } catch (error) {
-      console.log(error);
-    }
-  })();
 };
 
 ["Hector", "Eduardo", "Sandra", "Ana", "Saúl"];
